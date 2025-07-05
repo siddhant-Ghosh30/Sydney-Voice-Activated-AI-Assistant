@@ -27,14 +27,14 @@
 
 ## 📁 Project Structure
 
-Sydney-Voice-Activated-AI-Assistant/
-│
-├── main.py # Main assistant logic
-├── client2.py # Gemini API response handling
-├── keys.py # Stores API keys (ignored in version control)
-├── requirements.txt # Python dependencies
-├── .gitignore # Git ignore config
-└── .venv/ # Virtual environment (ignored)
+Sydney-Voice-Activated-AI-Assistant/<br>
+│<br>
+├── main.py # Main assistant logic<br>
+├── client2.py # Gemini API response handling<br>
+├── keys.py # Stores API keys (ignored in version control)<br>
+├── requirements.txt # Python dependencies<br>
+├── .gitignore # Git ignore config<br>
+└── .venv/ # Virtual environment (ignored)<br>
 
 
 
