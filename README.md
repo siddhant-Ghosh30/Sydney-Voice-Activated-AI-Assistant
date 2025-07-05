@@ -8,10 +8,10 @@
 
 - 🎙️ **Speech Recognition** – Listens for your wake word and understands commands
 - 🧠 **Gemini AI Integration** – Handles general queries using natural, conversational responses
-- 🎵 **Spotify Music Playback** – Search and open tracks directly using the Spotify API
+- ᯤSpotify **Spotify Music Playback** – Search and open tracks directly using the Spotify API
 - 🌐 **Web Automation** – Instantly opens websites like Google, YouTube, LinkedIn, etc.
 - 📰 **News Headlines** – Reads out current top headlines using NewsAPI
-- 🗣️ **Text-to-Speech** – Replies in a natural female voice using `pyttsx3`
+- 🗣️ **Text-to-Speech** – Replies in a natural voice using `pyttsx3`
 
 ---
 
