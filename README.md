@@ -1,6 +1,6 @@
 # 🗣️ Sydney – Voice Activated AI Assistant
 
-**Sydney** is a smart, voice-controlled virtual assistant built using Python. Think of her as your personal Alexa or Google Assistant – but customizable, offline-friendly, and equipped with AI-powered responses, music playback via Spotify, and real-time voice interaction.
+**Sydney** is a smart, voice-controlled virtual assistant built using Python. Think of her as your personal Alexa or Google Assistant –equipped with AI-powered responses, music playback via Spotify, and real-time voice interaction. Also designed to perform tasks such as web browsing, fetching news headlines
 
 ---
 
