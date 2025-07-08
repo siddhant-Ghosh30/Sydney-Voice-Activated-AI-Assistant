@@ -21,8 +21,67 @@ sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
     client_secret=keys.spotify_client_secret
 ))
 
-# API key from newsapi.org get your own 
+# Get city from IP
+def get_city_from_ip():
+    try:
+        response = requests.get("https://ipinfo.io/json")
+        data = response.json()
+        return data.get("city", "Bangalore")  # Default to Bangalore if city not found
+    except:
+        return "Bangalore"
 
+# Weather handler function
+def get_weather(city="Bangalore"):
+    try:
+        api_key = keys.openweather_api
+        base_url = "http://api.openweathermap.org/data/2.5/weather?"
+        full_url = f"{base_url}q={city}&appid={api_key}&units=metric"
+
+        response = requests.get(full_url)
+        data = response.json()
+
+        if data["cod"] != "404":
+            main = data["main"]
+            weather_desc = data["weather"][0]["description"]
+            temp = main["temp"]
+            humidity = main["humidity"]
+
+            # Optional: friendly prefixes
+            prefix = ""
+            if "rain" in weather_desc:
+                prefix = "Don’t forget your umbrella! "
+            elif "clear" in weather_desc:
+                prefix = "Looks like a great day! "
+
+            return (
+                f"{prefix}The current weather in {city} is {weather_desc}. "
+                f"The temperature is {temp} degrees Celsius with humidity at {humidity} percent."
+            )
+        else:
+            return "I couldn't find that city. Please try again."
+    except Exception:
+        return "Something went wrong while getting the weather."
+    
+def will_it_rain(city="Bangalore"):
+    try:
+        api_key = keys.openweather_api
+        url = f"http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric"
+        response = requests.get(url)
+        data = response.json()
+
+        if data["cod"] != "200":
+            return "I couldn't fetch the forecast for that city."
+
+        for forecast in data["list"][:8]:  # next 24 hours
+            weather = forecast["weather"][0]["main"].lower()
+            if "rain" in weather or "drizzle" in weather:
+                return f"Yes, rain is expected in {city} within the next 24 hours. Stay dry!"
+        return f"No rain is expected in {city} for the next 24 hours."
+    except Exception:
+        return "I had trouble checking the forecast."
+
+
+# Voice of Sydney
 """VOICE"""
 voices = engine.getProperty('voices')       #getting details of current voice
 engine.setProperty('voice', voices[1].id)   #Female voice for Sydney cause uk
@@ -96,6 +155,26 @@ def processCommand(c):
             # announce the headlines
             for article in articles:
                 say(article['title'])
+
+    elif "weather" in c.lower() or "temperature" in c.lower():
+        words = c.lower().split()
+        if "in" in words:
+            index = words.index("in")
+            city = " ".join(words[index + 1:])
+        else:
+            city = get_city_from_ip()
+
+        say(get_weather(city))
+
+    elif "will it rain" in c.lower():
+        words = c.lower().split()
+        if "in" in words:
+            index = words.index("in")
+            city = " ".join(words[index + 1:])
+        else:
+            city = get_city_from_ip()
+
+        say(will_it_rain(city))
     
     elif "stop" in c.lower():
         a = sys.exit()
