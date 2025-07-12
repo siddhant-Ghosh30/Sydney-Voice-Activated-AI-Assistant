@@ -1,6 +1,3 @@
-# since this is a mega project, I'll install alot of packages
-# and I'll install them in a virtual environment
-
 import speech_recognition as sr
 import webbrowser
 import pyttsx3
@@ -10,10 +7,14 @@ import keys # this will store my API keys
 from google import genai
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from google.genai import types
+import pyaudio
 
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
+
+client = genai.Client(api_key=keys.api_key_gemini)
 
 # import the Spotify API client   
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
@@ -90,9 +91,43 @@ def say(text):
     engine.say(text)
     engine.runAndWait()
 
+# def say(text):
+#     try:
+#         response = client.models.generate_content(
+#             model="gemini-2.5-flash-preview-tts",
+#             contents=f"Say Professionally: {text}",
+#             config=types.GenerateContentConfig(
+#                 response_modalities=["AUDIO"],
+#                 speech_config=types.SpeechConfig(
+#                     voice_config=types.VoiceConfig(
+#                         prebuilt_voice_config=types.PrebuiltVoiceConfig(
+#                             voice_name="Sulafat"
+#                         )
+#                     )
+#                 )
+#             )
+#         )
+
+#         audio_data = response.candidates[0].content.parts[0].inline_data.data
+
+#         p = pyaudio.PyAudio()
+#         stream = p.open(format=pyaudio.paInt16,
+#                         channels=1,
+#                         rate=24000,
+#                         output=True)
+#         stream.write(audio_data)
+#         stream.stop_stream()
+#         stream.close()
+#         p.terminate()
+
+#     except Exception as e:
+#         print(f"❌ Gemini TTS failed: {e}")
+
+        
+
 
 def aiProcess(command): # from client2.py
-    client = genai.Client(api_key=keys.api_key_gemini)
+    # client = genai.Client(api_key=keys.api_key_gemini)
     system_role = (
     "You are Sydney, a friendly, intelligent, and slightly witty female virtual assistant. "
     "You help users with tasks like answering questions, giving updates, or playing music. "
