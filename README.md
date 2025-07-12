@@ -1,6 +1,6 @@
 # Sydney – Voice Activated AI Assistant
 
-**Sydney** is a smart, voice-controlled virtual assistant built using Python. Think of her as your personal Alexa or Google Assistant –equipped with AI-powered responses, music playback via Spotify, and real-time voice interaction. Also designed to perform tasks such as web browsing, fetching news headlines
+**Sydney** is a smart, voice-activated virtual assistant built using Python — designed to bring the functionality of tools like Alexa or Google Assistant to your desktop. With real-time speech recognition and natural language responses powered by Google's Gemini AI, Sydney can perform a variety of tasks including playing music via Spotify, opening websites, fetching the latest news headlines, and providing weather updates or rain forecasts. The assistant intelligently detects your location using your IP address.
 
 ---
 
@@ -8,10 +8,11 @@
 
 - 🎙️ **Speech Recognition** – Listens for your wake word and understands commands
 - 🧠 **Gemini AI Integration** – Handles general queries using natural, conversational responses
-- ᯤSpotify **Music Playback** – Search and open tracks directly using the Spotify API
+- ᯤSpotify **Music Playback** – Search and open tracks directly using the Spotify API (through spotipy)
 - 🌐 **Web Automation** – Instantly opens websites like Google, YouTube, LinkedIn, etc.
 - 📰 **News Headlines** – Reads out current top headlines using NewsAPI
 - 🗣️ **Text-to-Speech** – Replies in a natural voice using `pyttsx3`
+- ☁️🌦️**Weather Reporting** - reports weather and rain forecasts (using the OpenWeatherMap Weather API) with location auto-detected via IP (via ipinfo.io).
 
 ---
 
@@ -21,7 +22,8 @@
 - `"Play She by Harry Styles"` → Opens the correct track on Spotify  
 - `"Open Google"` → Opens Google in the browser  
 - `"Tell me a joke"` → Let Gemini handle it  
-- `"What's the news"` → Reads latest headlines aloud  
+- `"What's the news"` → Reads latest headlines aloud
+- `"Will it rain today?”` (auto detects city if not mentioned) → Gets relavant weather info
 
 ---
 
