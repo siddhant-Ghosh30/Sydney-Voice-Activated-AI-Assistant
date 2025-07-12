@@ -101,7 +101,7 @@ def aiProcess(command): # from client2.py
     "Avoid technical jargon unless requested. Stay polite, calm, and helpful at all times. "
     "Only respond to the user's query below:")
     user_role = command
-    response = client.models.generate_content(model="gemini-2.0-flash",
+    response = client.models.generate_content(model="gemini-2.5-flash",
         contents= system_role + user_role)
     return response.text
 
