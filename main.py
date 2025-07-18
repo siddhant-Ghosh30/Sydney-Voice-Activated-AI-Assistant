@@ -11,8 +11,8 @@ from google.genai import types
 import pyaudio
 
 
-recognizer = sr.Recognizer()
-engine = pyttsx3.init()
+# recognizer = sr.Recognizer()
+# engine = pyttsx3.init()
 
 client = genai.Client(api_key=keys.api_key_gemini)
 
@@ -84,44 +84,44 @@ def will_it_rain(city="Bangalore"):
 
 # Voice of Sydney
 """VOICE"""
-voices = engine.getProperty('voices')       #getting details of current voice
-engine.setProperty('voice', voices[1].id)   #Female voice for Sydney cause uk
-
-def say(text):
-    engine.say(text)
-    engine.runAndWait()
+# voices = engine.getProperty('voices')       #getting details of current voice
+# engine.setProperty('voice', voices[1].id)   #Female voice for Sydney cause uk
 
 # def say(text):
-#     try:
-#         response = client.models.generate_content(
-#             model="gemini-2.5-flash-preview-tts",
-#             contents=f"Say Professionally: {text}",
-#             config=types.GenerateContentConfig(
-#                 response_modalities=["AUDIO"],
-#                 speech_config=types.SpeechConfig(
-#                     voice_config=types.VoiceConfig(
-#                         prebuilt_voice_config=types.PrebuiltVoiceConfig(
-#                             voice_name="Sulafat"
-#                         )
-#                     )
-#                 )
-#             )
-#         )
+#     engine.say(text)
+#     engine.runAndWait()
 
-#         audio_data = response.candidates[0].content.parts[0].inline_data.data
+def say(text):
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash-preview-tts",
+            contents= text,
+            config=types.GenerateContentConfig(
+                response_modalities=["AUDIO"],
+                speech_config=types.SpeechConfig(
+                    voice_config=types.VoiceConfig(
+                        prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                            voice_name="Sulafat"
+                        )
+                    )
+                )
+            )
+        )
 
-#         p = pyaudio.PyAudio()
-#         stream = p.open(format=pyaudio.paInt16,
-#                         channels=1,
-#                         rate=24000,
-#                         output=True)
-#         stream.write(audio_data)
-#         stream.stop_stream()
-#         stream.close()
-#         p.terminate()
+        audio_data = response.candidates[0].content.parts[0].inline_data.data
 
-#     except Exception as e:
-#         print(f"❌ Gemini TTS failed: {e}")
+        p = pyaudio.PyAudio()
+        stream = p.open(format=pyaudio.paInt16,
+                        channels=1,
+                        rate=24000,
+                        output=True)
+        stream.write(audio_data)
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
+
+    except Exception as e:
+        print(f"❌ Gemini TTS failed: {e}")
 
         
 
@@ -131,7 +131,7 @@ def aiProcess(command): # from client2.py
     system_role = (
     "You are Sydney, a friendly, intelligent, and slightly witty female virtual assistant. "
     "You help users with tasks like answering questions, giving updates, or playing music. "
-    "Speak in a natural, conversational tone suitable for a voice assistant. "
+    "Speak in a natural, conversational but professional tone suitable for a voice assistant. "
     "Keep your responses clear and concise — under 100 words unless the user specifically asks for a detailed or extended answer. "
     "Avoid technical jargon unless requested. Stay polite, calm, and helpful at all times. "
     "Only respond to the user's query below:")
